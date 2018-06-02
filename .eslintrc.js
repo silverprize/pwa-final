@@ -9,6 +9,7 @@ module.exports = {
     browser: true,
   },
   globals: {
+    naver: true,
     firebase: true
   },
   extends: [

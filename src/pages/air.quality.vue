@@ -41,32 +41,10 @@ export default {
   methods: {
     getPosition () {
       this.$bus.loading = true
-      navigator.geolocation.getCurrentPosition((position) => {
-        const tm128 = naver.maps.TransCoord.fromLatLngToTM128(new naver.maps.LatLng(position.coords.latitude, position.coords.longitude));
-
-        naver.maps.Service.reverseGeocode({
-          location: tm128,
-          coordType: naver.maps.Service.CoordType.TM128
-        }, (status, response) => {
-          if (status === naver.maps.Service.Status.ERROR) {
-            return alert('Something Wrong!');
-          }
-
-          const items = response.result.items
-          this.$bus.getAirQuality().then((res) => {
-            const guName = items[0].addrdetail.sigugun
-            let data = null
-            res.data.RealtimeCityAir.row.forEach(item => {
-              if (item.MSRSTE_NM === guName) {
-                data = item;
-                return false;
-              }
-            })
-            this.data = data
-            this.$bus.loading = false
-          })
-        });
-      });
+      this.$bus.getAirQuality().then((data) => {
+        this.data = data
+        this.$bus.loading = false
+      })
     }
   },
   destroyed () {

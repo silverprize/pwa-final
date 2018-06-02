@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>login</h1>
+    <h4>test@test.test / testtest</h4>
     <form @submit.prevent="login">
       <label>
       ID <input type="email" autofocus v-model="id">
@@ -31,13 +32,14 @@ export default {
         .then((data) => {
           alert('로그인 완료')
           this.$bus.user = data.email;
+          localStorage.setItem('user',  data.email)
           this.$nextTick(() => {
             this.$router.replace({
               path: this.$route.query.redir || '/'
             });
           });
         })
-        .catch(function (error) {
+        .catch((error) => {
           alert(error.message)
           this.inProgress = false;
         })
