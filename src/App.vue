@@ -1,13 +1,18 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <gnb></gnb>
     <router-view/>
   </div>
 </template>
 
 <script>
+import gnb from './components/gnb'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    gnb
+  }
 }
 </script>
 
