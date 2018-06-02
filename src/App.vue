@@ -12,6 +12,11 @@ export default {
   name: 'App',
   components: {
     gnb
+  },
+  created () {
+    naver.maps.onJSContentLoaded = () => {
+      this.$bus.mapContentLoaded = true
+    }
   }
 }
 </script>

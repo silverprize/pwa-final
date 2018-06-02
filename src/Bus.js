@@ -3,8 +3,11 @@ import Vue from 'vue'
 export default new Vue({
   data () {
     return {
-      user: null,
-      isLogin: false
+      // user: null,
+      // isLogin: false,
+      user: {},
+      isLogin: true,
+      mapContentLoaded: false
     }
   },
   watch: {
