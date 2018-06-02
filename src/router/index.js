@@ -42,11 +42,13 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.meta.auth && !$bus.isLogin) {
+  if (to.name === 'Login' && $bus.isLogin) {
+    next({path: '/'})
+  } else if (to.meta.auth && !$bus.isLogin) {
     // redirect
     alert('login 해주세요')
     next({
-      path: '/login'
+      path: `/login?redir=${to.fullPath}`
     })
   } else {
     next()
